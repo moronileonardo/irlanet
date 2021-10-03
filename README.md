@@ -1,7 +1,7 @@
 # Irlanet
 Sorgenti del sito Irlanet, progettato con Bootstrap
 
-## Funzioni parte statica
+## Pagine parte statica
 **Home Page** offre una breve presentazione dell'ipotetica azienda e una finestra di avviso
 
 **Pagina "Chi siamo"** è presente una lunga presentazione.
