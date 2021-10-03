@@ -1,0 +1,73 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" href="/demo/demo-stile.css" type="text/css" />
+<title>Ajax Login con jQuery</title>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<style type="text/css">
+.corretto,
+.errore {
+	padding: 3px;
+	text-align: center;
+}
+.corretto,
+.errore {
+	width: auto;
+	font-weight: bold;
+	border: 1px solid #349534;
+	background: #C9FFCA;
+	color: #008000;
+}
+.errore {
+	border: 1px solid #CC0000;
+	background: #F7CBCA;
+	color: #CC0000;
+}
+</style>
+
+<script async src='https://www.mrw.it/cdn-cgi/bm/cv/669835187/api.js'></script></head>
+<body>
+<h1>Ajax Login con jQuery</h1>
+<p class="intro">
+Su <a href="http://www.mrwebmaster.it">Mr.Webmaster</a> puoi trovare l'<a href="http://www.mrwebmaster.it/ajax/articoli/sistema-login-ajax-jquery-php_1295.html">articolo completo</a> che spiega come � stato creato lo script che vedi in questa pagina.<br />
+Per testare l'effetto prova a digitare qualcosa nei campi e cliccare su &quot;Entra&quot;. Le giuste credenziali sono <strong>demo</strong> e <strong>demo</strong>.
+</p>
+<form method="post" id="modulo_login" />
+<table border="0">
+<tr><td>Username:</td><td><input name="username" type="text" id="username" maxlength="10" style="width: 250px" /></td></tr>
+<tr><td>Password:</td><td><input name="password" type="password" id="password" maxlength="10" style="width: 250px" /></td></tr>
+<tr><td><input type="submit" id="submit" value="Entra" /></td><td><div id="messaggio"></div></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+$("#modulo_login").submit(function() {
+  // passo i dati (via POST) al file PHP che effettua le verifiche 
+  $.post("irlonia.netsons.org/irlanet/dynamiclogin/ajaxlogin.php", { username: $('#username').val(), password: $('#password').val(), rand: Math.random() }, function(risposta) {
+    // se i dati sono corretti...
+    if (risposta == 1) {
+      // applico l'effetto allo span con id "messaggio"
+      $("#messaggio").fadeTo(200, 0.1, function() {
+        // per prima cosa mostro, con effetto fade, un messaggio di attesa
+        $(this).removeClass().addClass('corretto').text('Login in corso...').fadeTo(900, 1, function() {
+          // al termine effettuo il redirect alla pagina privata
+          document.location = 'area-privata.php';
+        });
+      });
+    // se, invece, i dati non sono corretti...
+    }else{
+      // stampo un messaggio di errore
+      $("#messaggio").fadeTo(200, 0.1, function() {
+        $(this).removeClass().addClass('errore').text('Dati di login non corretti!').fadeTo(900,1);
+      });
+    }
+  });
+  // evito il submit del form (che deve essere gestito solo dalla funzione Javascript)
+  return false;
+});
+</script>
+<script src="/demo/demo-adv.js"></script>
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6757a1cf798b3753',m:'92c7c523116cd88350372329ceb4af667fcc1a28-1627407408-1800-AXn+2pf5bIaiZD/aGmMPYdIByOzPE/Evvy0PvdeuMrrhyjv9ow1KPIGpJaD+1HXdT/iY5xDRj8FNDw3hACA8Vn+bIen38wcOf8ggbmBOqf734KZt+NtNyj1DHMQGjkAmhi7I5UXrgZHIY9HVcmWjHJ4=',s:[0xf21235797a,0xcb6f72119d],}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"6757a1cf798b3753","token":"5da0aa2640c4473faca5007a590092a8","version":"2021.7.0","si":10}'></script>
+</body>
+</html>
